@@ -1,0 +1,18 @@
+<app-navbar></app-navbar>
+
+<div class="container row d-flex">
+  <div class="col-3">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link btn-primary mb-2" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+        aria-controls="v-pills-home" aria-selected="true" routerLink="/dashboard">Вывести базу данных пользователей</a>
+      <a class="nav-link btn-primary mb-2" id="v-pills-art-tab" data-toggle="pill" href="#v-pills-art" role="tab"
+        aria-controls="v-pills-art" aria-selected="false" routerLink="/creditInfo">Вывести базу данных о кредитах</a>
+      <a class="nav-link btn-primary mb-2" id="v-pills-design-tab" data-toggle="pill" href="#v-pills-design" role="tab"
+        aria-controls="v-pills-design" aria-selected="false"  routerLink="/create">Создать нового клиента</a>
+      <a class=" nav-link btn-primary mb-2" id="v-pills-tech-tab" data-toggle="pill" href="#v-pills-tech" role="tab"
+        aria-controls="v-pills-tech" aria-selected="false" routerLink="/signup">Добавление нового кредита</a>
+      <a class="nav-link btn-primary mb-2" id="v-pills-games-tab" data-toggle="pill" href="#v-pills-games" role="tab"
+        aria-controls="v-pills-games" aria-selected="false" (click)="filter('Game')">Посмотреть отчеты и риски</a>
+    </div>
+  </div>
+</div>

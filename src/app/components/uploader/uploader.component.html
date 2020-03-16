@@ -1,0 +1,7 @@
+<div class="dropzone" appDragDropFileUpload (hovered)="toggleHover($event)" (fileDropped)="onDrop($event)" [class.hovering]="isHovering">
+  <p>Перетащите фотографии в область</p>
+</div>
+
+<div *ngFor="let file of files">
+  <app-drag-drop-component [file]="file"></app-drag-drop-component>
+</div>

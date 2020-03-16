@@ -1,0 +1,57 @@
+<app-navbar></app-navbar>
+<div *ngIf="auth.currentUser else Block">
+  <div class=" container d-flex justify-content-center align-items-center">
+    <div class="form-wrapper">
+      <h2 class="text-center">Добавление кредита</h2>
+      <form [formGroup]="createCompanyForm" novalidate>
+        <div class="form-group">
+          <input type="text" name="family" formControlName="family" class="form-control" id="family-input"
+            placeholder="Наименование">
+          <div class="validation"
+            *ngIf="createCompanyForm.get('family').touched && createCompanyForm.get('family').invalid">
+            <small>Поле заполнено некоректно</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" name="name" formControlName="name" class="form-control" id="name-input" placeholder="Тип">
+          <div class="validation"
+            *ngIf="createCompanyForm.get('name').touched && createCompanyForm.get('name').invalid">
+            <small>Поле заполнено некоректно</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" name="fath" formControlName="fath" class="form-control" id="fath-input"
+            placeholder="Срок реализации">
+          <div class="validation"
+            *ngIf="createCompanyForm.get('fath').touched && createCompanyForm.get('fath').invalid">
+            <small>Поле заполнено некоректно</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" name="fath" formControlName="fath" class="form-control" id="fath-input"
+            placeholder="Процентная ставка">
+          <div class="validation"
+            *ngIf="createCompanyForm.get('fath').touched && createCompanyForm.get('fath').invalid">
+            <small>Поле заполнено некоректно</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" name="fath" formControlName="fath" class="form-control" id="fath-input"
+            placeholder="Сумма кредитования">
+          <div class="validation"
+            *ngIf="createCompanyForm.get('fath').touched && createCompanyForm.get('fath').invalid">
+            <small>Поле заполнено некоректно</small>
+          </div>
+        </div>
+        <button routerLink="/main" type="submit" class="btn btn-primary" [disabled]="createCompanyForm.invalid"
+          (click)="validate()">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+<ng-template #Block>
+  <div class="container-wrapper container d-flex justify-content-center align-items-center">
+    <h1>Для доступа необходимо авторизоваться</h1>
+    <button class="btn btn-secondary ml-3" routerLink="/login">Перейти к авторизации</button>
+  </div>
+</ng-template>

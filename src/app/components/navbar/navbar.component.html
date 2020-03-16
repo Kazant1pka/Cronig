@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="/main">
+    <img src="https://img.icons8.com/offices/30/000000/feed-in.png">
+  </a>
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button> -->
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/create" routerLinkActive="active">Создать клиента</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/credit" routerLinkActive="active">Выдать кредит</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav col-auto" *ngIf="auth.isAuth() else loggedIn">
+      <!-- <li>
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </li> -->
+      <li class="nav-item">
+        <a routerLink="/profile" class="nav-link">{{auth.currentUser.username}}</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/login" class="nav-link" (click)="auth.out()">Выход</a>
+      </li> 
+    </ul>  
+  </div>
+</nav>
+<ng-template #loggedIn>
+  <ul class="navbar-nav col-auto">
+    <li class="nav-item">
+      <a routerLink="/login" routerLinkActive="active" class="nav-link">Вход</a>
+    </li>
+  </ul>
+</ng-template>

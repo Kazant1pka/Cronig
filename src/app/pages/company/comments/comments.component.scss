@@ -1,0 +1,36 @@
+.chat-message {
+    padding: 0.75em 1em;
+  
+  }
+  
+  .chat-message .image-wrapper {
+    margin-right: 1em;
+    height: 50px;
+    width: 50px;
+  }
+  
+  .chat-message .image-wrapper img {
+    height: 50px;
+    width: 50px;
+  }
+  
+  .chat-message .name {
+    font-weight: 600;
+    margin-right: 1em;
+    font-size: 0.7em;
+  }
+  
+  .chat-message .timestamp {
+    color: lightslategray;
+    font-weight: 200;
+    font-size: 0.6em;
+    margin-left: 1.1em;
+  }
+  
+  .chat-message .message {
+    font-size: 0.8em;
+    color: darken(gray, 25%);
+    font-weight: 200;
+    margin-top: 0.2em;
+  }
+  

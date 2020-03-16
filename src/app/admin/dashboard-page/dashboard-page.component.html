@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+<table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Трудоустройство</th>
+        <th scope="col">Количество детей</th>
+        <th scope="col">Семейное положение</th>
+        <th scope="col">Детали</th>
+      </tr>
+    </thead>
+    <tbody> 
+      <tr *ngFor="let item of users; index as i;">
+        <ng-container *ngIf="item.status === 'Клиент'">
+          <th scope="row">{{i+1}}</th>
+          <td>{{item.family}} {{item.name}}</td>
+          <td>{{item.work}}</td>
+          <td>{{item.child}}</td>
+          <td>{{item.marry}}</td>
+          <td>{{item.description}}</td>
+          <td><a href="/dashboard" (click)="del(item._id)">Удалить клиента</a></td>
+        </ng-container>   
+      </tr>
+    </tbody>
+  </table>
+<router-outlet></router-outlet>

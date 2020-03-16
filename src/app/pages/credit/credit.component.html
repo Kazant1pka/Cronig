@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+<div *ngIf="auth.currentUser else Block">
+  <div>
+    <div>
+      <div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Пользователь</label>
+            </div>
+            <select class="custom-select" id="user" name="user" formControlName="user">
+              <option  *ngFor="let item of items" value="{{item.family}} {{item.name}}">{{item.family}} {{item.name}}</option>
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Кредит</label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect01" name="child" formControlName="user">
+                <option  *ngFor="let item of cred" value="{{item.family}} {{item.name}}">{{item.family}} {{item.name}}</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary"
+            (click)="vidat()">Выдать</button>
+      </div>
+    </div>
+  </div>
+  <ng-template #Block>
+    <div class="container-wrapper container d-flex justify-content-center align-items-center">
+      <h1>Для доступа необходимо авторизоваться</h1>
+      <button class="btn btn-secondary ml-3" routerLink="/login">Перейти к авторизации</button>
+    </div>
+  </ng-template>

@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<div class="row">
+  <div class="items">
+    <div *ngFor="let item of items" class="item" (click)="addToShippintCard(item)">
+      <h2 class="item-label">
+        {{ item.label }}
+      </h2>
+      <label class="item-label">
+        {{ item.desc }}
+      </label>
+      <p class="item-price">{{ item.amount.value }} ₽</p>
+    </div>
+  </div>
+  <div class="shopping-cart" waPayment [paymentTotal]="total">
+    <div class="sticky">
+      <h4>
+        Пожертвование на лечение
+      </h4>
+  
+      <ng-container *ngIf="shippingCart.length > 0; else noItems">
+        <div *ngFor="let cartItem of shippingCart" waPaymentItem class="shopping-card-item"
+          [paymentLabel]="cartItem.label" [paymentAmount]="cartItem.amount">
+          {{ cartItem.label }} ({{ cartItem.amount.value }}
+          {{ cartItem.amount.currency }})
+        </div>
+      </ng-container>
+      <ng-template #noItems>
+        Пусто
+      </ng-template>
+  
+      <div class="total">
+        <input type="number" [(ngModel)] = "money">
+        <hr> 
+        <b>Total:</b>
+        {{ totalSum+money }} ₽ 
+      </div>
+  
+      <button class="buy-button" [disabled]="totalSum+money === 0" (waPaymentSubmit)="onPayment($event)"
+        (waPaymentError)="onPaymentError($event)">
+        Пожертвовать
+      </button>
+    </div>
+  </div>
+</div>
+

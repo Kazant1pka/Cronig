@@ -1,0 +1,102 @@
+<app-navbar></app-navbar>
+
+<div class="container emp-profile">
+  <form method="post">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="profile-head">
+          <h5>
+            {{auth.currentUser.username}}
+          </h5>
+          <h6>
+            {{auth.currentUser.status}}
+          </h6>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                aria-selected="true">Личные данные</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                aria-selected="false">Компании</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row">
+              <div class="col-md-6">
+                <label>Имя</label>
+              </div>
+              <div class="col-md-6">
+                <input type="text" [(ngModel)]="auth.currentUser.username" name="input-name">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Электронный адрес</label>
+              </div>
+              <div class="col-md-6">
+              <input type="text" [(ngModel)]="auth.currentUser.email" name="input-email">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Оформил кредитов</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{auth.currentUser.createdCompany.length}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Одобренных кредитов</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{auth.currentUser.likedCompany.length}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Купленных бонусов</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{auth.currentUser.uBonus.length}}</p>
+              </div>
+            </div>
+            <div class="">
+              <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Сохранить" (click)="update()"/>
+            </div>
+          </div>
+          
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Имя</th>
+                  <th scope="col">Открыть</th>
+                  <th scope="col">Редактировать</th>
+                  <th scope="col">Удалить</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of auth.currentUser.createdCompany; index as i;">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{item}}</td>
+                  <td><a routerLink="/company" (click)="setCom(item)">Открыть</a></td>
+                  <td><a routerLink="/editCompany" (click)="setCom(item)">Ред</a></td>
+                  <td><a routerLink="/profile"(click)="delCompany(item)">Удал</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

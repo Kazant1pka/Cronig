@@ -1,0 +1,78 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <h1>{{company.name}}</h1>
+  <div class="row float-right" *ngIf="auth.currentUser">
+    <app-rating max=5 [ratedCount]="avrat" (onRating)=onRating($event)></app-rating>
+    <div *ngIf="avrat else noRating">{{avrat}}</div>
+  </div>
+  <div *ngIf="auth.currentUser">
+    <small *ngIf="auth.currentUser._id === company.creator">
+      <button routerLink="/editCompany">Редактировать</button>
+    </small>
+  </div>
+  <div class="row d-flex">
+    <div class="col">
+      <div id="gallery" class="carousel slide" data-ride="">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <iframe class="video d-block" [src]="'https://www.youtube.com/embed/'+company.video | safe" frameborder="0"
+              allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="carousel-item" *ngFor="let item of company.images">
+            <img [src]="item"
+              class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#gallery" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#gallery" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+    <div class="col">
+      <p>Категория проекта: {{company.subject}}</p>
+      <p>Собрано {{progress}}% средств. <b>{{company.earned}}</b> из <b>{{company.summa}}</b> р.</p>
+      <div class="progress" style="height: 10px">
+        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+          [style.width.%]="company.earned/company.summa*100">
+        </div>
+      </div>
+      <p>Дата закрытия: {{company.endDate | date}}</p>
+      <button class="btn btn-primary" routerLink="/payment">Пожертвовать</button>
+    </div>
+  </div>
+  <nav class="mt-2">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+        aria-controls="nav-home" aria-selected="true">Описание</a>
+      <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-news" role="tab"
+        aria-controls="nav-news" aria-selected="false">Новости</a>
+      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-comment" role="tab"
+        aria-controls="nav-comment" aria-selected="false">Комментарии</a>
+      <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-bonus" role="tab"
+        aria-controls="nav-bonus" aria-selected="false">Бонусы</a>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <div markdown [data]="company.description"></div>
+    </div>
+    <div class="tab-pane fade" id="nav-news" role="tabpanel" aria-labelledby="nav-news-tab">
+      <app-news></app-news>
+    </div>
+    <div class="tab-pane fade" id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">
+      <app-comments></app-comments>
+    </div>
+    <div class="tab-pane fade" id="nav-bonus" role="tabpanel" aria-labelledby="nav-bonus-tab">
+      <app-bonus [bonuses]="company.bonus"></app-bonus>
+    </div>
+  </div>
+</div>
+<ng-template #noRating>
+  <div>Будь первым</div>
+</ng-template>
+<router-outlet></router-outlet>

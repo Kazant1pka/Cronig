@@ -1,0 +1,14 @@
+.input-image{
+    border: 2px solid black;
+}
+.news{
+    border: 1px solid black;
+    margin-bottom: 2px;
+    img{
+        width: 100%;
+        border-radius: 10px;
+    }
+}
+.del-news{
+    float: right;
+}

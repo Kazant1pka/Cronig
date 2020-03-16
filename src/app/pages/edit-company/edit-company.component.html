@@ -1,0 +1,85 @@
+<app-navbar></app-navbar>
+<div class=" container d-flex justify-content-center align-items-center">
+  <div class="form-wrapper">
+    <h2 class="text-center">Редактирование компании</h2>
+    <form [formGroup]="editCompanyForm" novalidate>
+      <div class="form-group">
+        <label for="name-input">Наименование кампании</label>
+        <input type="text" name="name" formControlName="name" class="form-control" id="name-input">
+        <div class="validation" *ngIf="editCompanyForm.get('name').touched && editCompanyForm.get('name').invalid">
+          <small>Поле заполнено некоректно</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <angular-markdown-editor formControlName="description" textareaId="editor1" rows="12" name="markdownText"
+          [(ngModel)]="markdownText">
+        </angular-markdown-editor>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Категория</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01" name="subject" formControlName="subject">
+          <option value="Art">Исскуство</option>
+          <option value="Design">Дизайн</option>
+          <option value="Game">Игры</option>
+          <option value="Music">Музыка</option>
+          <option value="Science">Наука</option>
+          <option value="Film">Фильмы и видео</option>
+          <option value="Tech">Технологии</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <input type="number" name="summa" formControlName="summa" class="form-control" id="summa-input">
+        <div class="validation" *ngIf="editCompanyForm.get('summa').touched && editCompanyForm.get('summa').invalid">
+          <small>Поле заполнено некоректно</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" name="video" formControlName="video" class="form-control" id="video-input">
+      </div>
+
+      <div class="card" formGroupName='bonus'>
+        <div class="card-header d-flex justify-content-between">
+          Бонусы
+          <button class="btn btn-outline-secondary btn-sm" type="button" id="button-addon2"
+            (click)="addBonus()">Добавить</button>
+        </div>
+
+        <div *ngFor="let item of company.bonus; let idx = index;">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <label>Бонус {{this.idx+1}}</label>
+              <button class="btn btn-outline-secondary btn-sm" type="button" id="button-addon2"
+                (click)="delBonus(idx)">Удалить</button>
+            </div>
+            <div class=" form-row">
+              <div class="form-group col-md-6">
+                <input type="text" class="form-control" id="bonus-bname" formControlName="bname" placeholder="Название"
+                  value="{{this.company.bonus[idx].bname}}">
+              </div>
+              <div class="form-group col-md-6">
+                <input type="number" class="form-control" id="bonus-bsum" formControlName="bsum" placeholder="Сумма"
+                  value="{{this.company.bonus[idx].bsum}}">
+              </div>
+            </div>
+            <div class="form-group">
+              <textarea type="text" class="form-control" id="inputAddress" placeholder="Описание"
+                formControlName="bdescription" value="{{company.bonus[idx].bdescription}}"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" style="border: 2px solid black">
+        <div class="profile" *ngFor="let item of company.images; let idx = index">
+          <a (click)="delPic(idx)"><i class="fas fa-trash-alt"></i></a>
+          <img [src]="item"><br>
+        </div>
+        <app-uploader></app-uploader>
+      </div>
+      <button type="submit" class="btn btn-primary" routerLink="/company" [disabled]="editCompanyForm.invalid"
+        (click)="validateEdit()">Submit</button>
+    </form>
+  </div>
+</div>

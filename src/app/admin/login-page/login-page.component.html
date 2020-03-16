@@ -1,0 +1,14 @@
+<div *ngIf="auth.currentUser else Block">
+  <div *ngIf="auth.currentUser.status === 'Администратор' else noAdmin">
+    <h1>Успешный вход в панель администратора</h1>
+    <button class="btn btn-secondary" (click)="dash()">Перейти в кабинет</button>
+  </div>
+</div>
+<ng-template #Block>
+    <app-error></app-error>
+</ng-template>
+<ng-template #noAdmin>
+    <app-error></app-error>
+</ng-template>
+
+

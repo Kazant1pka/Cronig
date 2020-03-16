@@ -1,0 +1,34 @@
+<div *ngIf="companies else noCompanies">
+  <div class="row row-cols-1 row-cols-md-3 ">
+    <div class="col" *ngFor="let item of companies">
+      <div class="card">
+        <img [src]="item.images[0]" class="card-img-top"
+          alt="..."> 
+        <div class="card-body" >
+          <a routerLink="/company" routerLinkActive="active">
+            <h5 class="card-title" (click)="getID(item._id)">{{item.name}}</h5>
+          </a>
+          <small  *ngIf="item.status == 2">(Закрыта)</small>
+          <hr>
+          <small markdown *ngIf="item.description.includes('.')" class="card-text">{{item.description.slice(0, item.description.indexOf('.'))}}</small>
+          <small markdown *ngIf="!item.description.includes('.')" class="card-text">{{item.description}}</small>
+          
+        </div>
+        <div class="card-footer">
+          {{item.earned}} из {{item.summa}} р.
+          <div class="progress" style="height: 2px">
+            <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+              [style.width.%]="item.earned/item.summa*100">
+            </div>
+          </div>
+          <small>до {{item.endDate | date :'dd MMM yyyy'}}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #noCompanies>
+  <h1>Компаний нет</h1>
+</ng-template>
+
+
